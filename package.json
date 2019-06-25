@@ -1,0 +1,30 @@
+{
+  "name": "traderscore",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {},
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "apollo-link-http": "^1.5.15",
+    "apollo-server-lambda": "^2.4.8",
+    "aws-sdk": "^2.427.0",
+    "graphql": "^14.2.1",
+    "graphql-fields": "^2.0.3",
+    "graphql-tag": "^2.10.1",
+    "graphql-tools": "^4.0.4",
+    "node-fetch": "latest"
+  },
+  "devDependencies": {
+    "dotenv": "^7.0.0",
+    "eslint": "^5.14.1",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-jest": "^22.3.0",
+    "eslint-plugin-jsx-a11y": "^6.2.1",
+    "eslint-plugin-react": "^7.12.4",
+    "jest": "^24.1.0",
+    "sinon": "^7.2.5",
+    "tradelead-core-infra": "git+https://github.com/tradelead/codeInfra.git"
+  }
+}
