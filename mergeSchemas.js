@@ -1,17 +1,13 @@
 const { introspectSchema, makeRemoteExecutableSchema, mergeSchemas } = require('graphql-tools');
 const { createHttpLink } = require('apollo-link-http');
 const { setContext } = require('apollo-link-context');
+const { onError } = require('apollo-link-error');
+const { ApolloLink } = require('apollo-link');
 const fetch = require('node-fetch');
 
 const remoteSchema = async (uri) => {
-  let link = createHttpLink({
-    uri,
-    fetch,
-  });
-
-  link = setContext((request, previousContext) => {
-    console.log(JSON.stringify({ previousContext }));
-    return Object.assign({}, previousContext, {
+  const contextLink = setContext((request, previousContext) => (
+    Object.assign({}, previousContext, {
       headers: {
         Authorization: (
           previousContext
@@ -19,8 +15,27 @@ const remoteSchema = async (uri) => {
           && previousContext.graphqlContext.headers.Authorization
         ),
       },
-    });
-  }).concat(link);
+    })
+  ));
+
+  const remoteErrorLink = onError(({ graphQLErrors }) => {
+    if (graphQLErrors) {
+      graphQLErrors.forEach((val) => {
+        Object.setPrototypeOf(val, Error.prototype);
+      });
+    }
+  });
+
+  const httpLink = createHttpLink({
+    uri,
+    fetch,
+  });
+
+  const link = ApolloLink.from([
+    contextLink,
+    remoteErrorLink,
+    httpLink,
+  ]);
 
   const schema = await introspectSchema(link);
 
