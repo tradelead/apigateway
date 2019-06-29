@@ -15,6 +15,7 @@ const serverHandlerPromise = (async () => {
         'Content-Type',
         'Origin',
         'Accept',
+        'Authorization',
       ],
     };
     console.log(process.env.CORS_ORIGIN, handlerArgs);
