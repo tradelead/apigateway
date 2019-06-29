@@ -6,10 +6,11 @@ Resources:
     Properties:
       Handler: lambda.handler
       Runtime: nodejs10.x
-      Timeout: 15
+      Timeout: 30
       Environment:
         Variables:
           GRAPHQL_URIS: "[\"https://r12hd0umhk.execute-api.us-east-1.amazonaws.com/Prod/graphql\", \"https://c7bmvp5hr5.execute-api.us-east-1.amazonaws.com/Prod/graphql\"]"
+          CORS_ORIGIN: "*"
       Events:
         Api:
           Type: Api
