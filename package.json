@@ -6,6 +6,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "apollo-link-context": "^1.0.18",
     "apollo-link-http": "^1.5.15",
     "apollo-server-lambda": "^2.4.8",
     "aws-sdk": "^2.427.0",

@@ -4,7 +4,14 @@ const mergeSchemas = require('./mergeSchemas');
 const serverHandlerPromise = (async () => {
   console.log('Create Schema');
   const schema = await mergeSchemas(JSON.parse(process.env.GRAPHQL_URIS));
-  const server = new ApolloServer({ schema });
+  const server = new ApolloServer({
+    schema,
+    context: ({ event, context }) => ({
+      headers: event.headers,
+      event,
+      context,
+    }),
+  });
   const handlerArgs = {};
 
   if (process.env.CORS_ORIGIN) {
